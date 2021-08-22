@@ -1,2 +1,5 @@
-# example_next.js_SSR_styled-components
-Test case Focus Calendar
+# Test case Focus Calendar
+
+### Stack: React + Next.js + SSR + styled-components + SVG + date-fns
+
+![](assets/screenshot.png)
