@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-interface IRadioButton {
+interface RadioButtonProps {
     id: string;
     label: string;
+    checked: boolean;
+    value: number;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const RadioButton = ({ id, label, ...props }: IRadioButton) => {
+const RadioButton: FC<RadioButtonProps> = ({ id, label, ...props }) => {
     return (
         <Wrapper>
             <input id={id} type="radio" {...props} />

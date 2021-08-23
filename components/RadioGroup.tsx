@@ -2,22 +2,20 @@ import React, { ReactElement, ReactEventHandler, useState } from 'react';
 import styled from 'styled-components';
 import RadioButton from './RadioButton';
 
-interface Props {
+interface RadioGroupProps {
     labels: string[];
-    onChange: React.FC<string>;
     name: string;
-    // checked: boolean;
-    [anyProps: string]: any;
+    onChange: (index: number) => void;
 }
-const RadioGroupButtons: React.FC<Props> = (props) => {
-    const { labels } = props;
+const RadioGroup: React.FC<RadioGroupProps> = (props) => {
+    const { labels, name, onChange } = props;
 
     const [active, setActive] = useState(-1);
 
     const handleActiveChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setActive(parseInt(value));
-        props.onChange(value);
+        const index = parseInt(e.target.value);
+        setActive(index);
+        onChange(index);
     };
 
     return (
@@ -26,8 +24,8 @@ const RadioGroupButtons: React.FC<Props> = (props) => {
                 ? labels.map((label: any, i: number) => (
                       <RadioButton
                           {...props}
-                          key={props.name + i}
-                          id={props.name + '-' + i}
+                          key={name + i}
+                          id={name + '-' + i}
                           checked={active == i}
                           onChange={handleActiveChange}
                           label={label}
@@ -39,12 +37,9 @@ const RadioGroupButtons: React.FC<Props> = (props) => {
     );
 };
 
-export default RadioGroupButtons;
+export default RadioGroup;
 
 const Container = styled.div`
-    /* height: 100%; */
     display: flex;
-    /* align-items: center; */
-    /* justify-content: center; */
     flex-direction: column;
 `;
