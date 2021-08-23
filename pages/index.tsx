@@ -6,8 +6,6 @@ import SvgElement from '../components/SvgElement';
 import { parseISO, differenceInMinutes } from 'date-fns';
 import { format, zonedTimeToUtc } from 'date-fns-tz';
 
-// import { GetStaticProps, GetStaticPropsContext } from 'next';
-
 const GlobalStyle = createGlobalStyle`
 * {
     padding: 0;
@@ -17,14 +15,14 @@ const GlobalStyle = createGlobalStyle`
 body {
     font-family: 'Inter', sans-serif;
     font-weight: lighter;
-  }
-  a {
+}
+a {
     text-decoration: none;
     cursor: pointer;
-  }
-  a:hover {
+}
+a:hover {
     text-decoration: underline;
-  }
+}
 `;
 const Container = styled.div`
     max-width: 1200px;
@@ -52,43 +50,10 @@ interface IElement {
     text?: string;
 }
 
-// export default function Index({ timezones, events }: any) {
-export default function App() {
-    const [events, setEvents] = useState<IEvent[]>([
-        {
-            start: '2021-07-23T12:00:00.000Z',
-            end: '2021-07-23T14:00:00.000Z',
-            summary: 'Daily meeting 😜🌷🎁😜🌷🎁😜🌷🎁😜🌷🎁😜🌷🎁',
-        },
-        {
-            start: '2021-10-31T02:30:00+02:00',
-            end: '2021-10-31T05:30:00+01:00',
-            summary: 'Berlin meeting',
-        },
-        {
-            start: '2021-10-30T23:30:00.000Z',
-            end: '2021-10-31T03:30:00.000Z',
-            summary:
-                'Night meeting (Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке)',
-        },
-    ]);
-    const [timezones, setTimezones] = useState<string[]>([
-        'Europe/Berlin',
-        'UTC',
-        'Asia/Irkutsk',
-        'Pacific/Chatham',
-    ]);
-    // useEffect(() => {
-    //     effect;
-    //     // return () => {
-    //     //     cleanup;
-    //     // };
-    // }, [ timezones, events ]);
-
+export default function Index({ timezones, events }: any) {
     const [timezone, setTimezone] = useState<string>('');
     const [event, setEvent] = useState<IEvent>();
     const [element, setElement] = useState<IElement>();
-    // console.log(timezones, events);
 
     useEffect(() => {
         if (event && timezone) {
@@ -133,7 +98,8 @@ export default function App() {
                     <RadioGroup
                         name="events"
                         labels={events.map(
-                            (item, i) => 'EventSummary' + (i + 1),
+                            (item: string, i: number) =>
+                                'EventSummary' + (i + 1),
                         )}
                         onChange={(value) => setEvent(events[value])}
                     />
@@ -167,8 +133,8 @@ export async function getServerSideProps() {
 
     return {
         props: {
-            timezones,
-            events,
+            timezones: timezones['timezones'],
+            events: events['events'],
         },
     };
 }
