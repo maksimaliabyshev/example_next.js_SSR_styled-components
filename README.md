@@ -1,4 +1,4 @@
-# Test case Focus Calendar
+# Test case Calendar
 
 ### Stack: React + Next.js + SSR + styled-components + SVG + date-fns
 
